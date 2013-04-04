@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" xmlns:app="http://schemas.android.com/apk/res/com.drawerchat">
+
+    <TextView
+        android:id="@+id/media_play_indicator"
+        android:layout_width="300dip"
+        android:ellipsize="marquee"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dip"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+	    <ImageButton
+	        android:id="@+id/media_play_prev"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@android:drawable/ic_media_previous"/>
+	    <ImageButton
+	        android:id="@+id/media_play_play"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@android:drawable/ic_media_play"/>
+	    <ImageButton
+	        android:id="@+id/media_play_next"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@android:drawable/ic_media_next" />
+    </LinearLayout>
+    
+    <com.drawerchat.widget.SlidingDrawer
+        xmlns:my="http://schemas.android.com/apk/res/com.drawerchat"
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        my:content="@+id/content"
+        my:direction="bottomToTop"
+        my:handle="@+id/handle" >
+
+        <include
+            android:id="@id/content"
+            layout="@layout/drawer_chat" />
+
+        <ImageView
+            android:id="@id/handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chat_handle_reverse"
+            android:contentDescription="SlidingDrawer" />
+    </com.drawerchat.widget.SlidingDrawer>
+
+</RelativeLayout>
