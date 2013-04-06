@@ -10,144 +10,163 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.drawerchat.R;
-import com.drawerchat.models.Friend;
-import com.drawerchat.models.Friend.Status;
-import com.drawerchat.widget.DrawerChatHelper;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ListActivity;
+import android.database.DataSetObserver;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements OnPreparedListener, OnCompletionListener, OnClickListener {
+import com.drawerchat.models.Friend;
+import com.drawerchat.models.Friend.Status;
+import com.drawerchat.widget.DrawerChatHelper;
+
+public class MainActivity extends Activity implements OnPreparedListener,
+		OnCompletionListener, OnClickListener {
 
 	MediaPlayer mediaPlayer;
 	TextView mediaPlayIndicator;
 	Thread t;
-	JSONArray playlists;
-	ArrayList<String> musicFiles;
+	ArrayList<Track> playlists;
+	ArrayList<Track> musicFiles;
 	ArrayList<String> musicFilesTitles;
 	ImageButton prev, playPause, next;
 	boolean readyToPlay = false, isPaused = false, mediaHasInitialized = false;
 	int currentSeekPosition = 0;
 	int currentFileIndex = 0;
-	String playlistBaseUrl = "http://192.168.1.121:4444/api/playlists/";
-	String trackBaseUrl = "http://192.168.1.121:4444/stream/";
-	
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        DrawerChatHelper helper = new DrawerChatHelper(this, R.id.drawer, false, 0, true, "Game");
-        helper.addNewFriend(new Friend("Ty", "You suck at this!", Status.INACTIVE));
-        helper.addNewFriend(new Friend("Garrett", "You suck at this!", Status.ACTIVE));
-        helper.addNewFriend(new Friend("Dee", "You suck at this!", Status.INGAME));
-      
-		mediaPlayer = new MediaPlayer();
-		setupViews();
-		new GetPlayListTask().execute(playlistBaseUrl);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
-    
-    public void setupViews() {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		DrawerChatHelper helper = new DrawerChatHelper(this, R.id.drawer,
+				false, 0, true, "Game");
+		helper.addNewFriend(new Friend("Ty", "You suck at this!",
+				Status.INACTIVE));
+		helper.addNewFriend(new Friend("Garrett", "You suck at this!",
+				Status.ACTIVE));
+		helper.addNewFriend(new Friend("Dee", "You suck at this!",
+				Status.INGAME));
+
+		mediaPlayer = new MediaPlayer();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection Add Other Item Later
+		switch (item.getItemId()) {
+		case R.id.music_settings:
+			setupViews();
+			new GetPlayListTracksTask()
+					.execute("http://192.168.1.121:4444/api/playlists/0");
+			break;
+		default:
+			break;
+		}
+		return true;
+	}
+
+	public void setupViews() {
 		mediaPlayIndicator = (TextView) findViewById(R.id.media_play_indicator);
 		mediaPlayIndicator.setText("Preparing Playlist Selection...");
-		
 		prev = (ImageButton) findViewById(R.id.media_play_prev);
 		prev.setEnabled(false);
+		prev.setImageResource(R.drawable.previous_button_disable);
 		prev.setOnClickListener(this);
 		playPause = (ImageButton) findViewById(R.id.media_play_play);
 		playPause.setOnClickListener(this);
 		next = (ImageButton) findViewById(R.id.media_play_next);
 		next.setEnabled(false);
+		next.setImageResource(R.drawable.next_button_disable);
 		next.setOnClickListener(this);
-    }
-    
-    public void setupPlaylistDialog() {
-    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setTitle("Select Playlist");
+	}
 
-    	ListView modeList = new ListView(this);
-    	ArrayList<String> playlistNames = new ArrayList<String>();
-    	for (int i=0; i<playlists.length(); i++) {
-    		try {
-    			JSONObject obj = playlists.getJSONObject(i);
-    			playlistNames.add(obj.getString("name"));
-    		} catch (JSONException e) {
-    			e.printStackTrace();
-    		}
-    	}
-    	ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, playlistNames);
-    	modeList.setAdapter(modeAdapter);
+	public void setupPlaylistDialog(ArrayList<String> songNames) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Select Song");
+		ListView songListView = new ListView(this);
+		ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, songNames);
+		songListView.setAdapter(modeAdapter);
+		builder.setView(songListView);
+		final Dialog dialog = builder.create();
 
-    	builder.setView(modeList);
-    	final Dialog dialog = builder.create();
-    	
-    	modeList.setOnItemClickListener(new OnItemClickListener() {
+		songListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
+				if (mediaPlayer.isPlaying()) {
+					mediaPlayer.reset();
+				}
 				dialog.dismiss();
-				try {
-	    			JSONObject obj = playlists.getJSONObject(pos);
-	    			String playlistUrl = playlistBaseUrl + obj.getString("id");
-	    			Log.v("Chosen Playlist URL", playlistUrl);
-	    			new GetPlayListTracksTask().execute(playlistUrl);
-	    		} catch (JSONException e) {
-	    			e.printStackTrace();
-	    		}
+				currentFileIndex = pos;
+				String playlistUrl = SocksoApi.playlistBaseUrl + pos + 1;
+				Log.v("Chosen SONG URL", playlistUrl);
+				handlePlayPause();
 			}
-    	});
+		});
 
-    	dialog.show();
-    }
-    
-    private class GetPlayListTask extends  AsyncTask<String, Void, Void> {
+		dialog.show();
+	}
+
+	private class GetPlayListTracksTask extends AsyncTask<String, Void, Void> {
 
 		@Override
 		protected Void doInBackground(String... params) {
+			musicFiles = new ArrayList<Track>();
+			musicFilesTitles = new ArrayList<String>();
+
 			try {
+				Log.v("IN BACKGROUND TASK", "ONLY SEE ONCE");
 				HttpClient client = new DefaultHttpClient();
 				HttpGet get = new HttpGet(params[0]);
 				HttpResponse response = client.execute(get);
 				InputStream is = response.getEntity().getContent();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(is)); 
-		        StringBuilder sb = new StringBuilder(); 
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(is));
+				StringBuilder sb = new StringBuilder();
 
-		        String line = null; 
-	            while ((line = reader.readLine()) != null) { 
-	            	sb.append(line + "\n"); 
-	            } 
-	            
-	            String json = sb.toString().replace(",}", "}");
-	            Log.v("PLAYLISTS", json);
-	            playlists = new JSONArray(json);
-	            
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line + "\n");
+				}
+
+				musicFiles = Track.fromJSONArray(new JSONObject(sb.toString())
+						.getJSONArray("tracks"));
+
+				for (int i = 0; i < musicFiles.size(); i++) {
+					Track track = musicFiles.get(i);
+					musicFilesTitles.add(track.getName());
+					Log.v("HERE ARE THE FILES", track.getFileName());
+				}
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (JSONException e) {
@@ -155,70 +174,21 @@ public class MainActivity extends Activity implements OnPreparedListener, OnComp
 			}
 			return null;
 		}
-		
-		@Override
-    	protected void onPostExecute(Void result) {
-    		super.onPostExecute(result);
-    		if (playlists != null) {
-    			setupPlaylistDialog();
-    		}
-    	}
-    }
-    
-    private class GetPlayListTracksTask extends  AsyncTask<String, Void, Void> {
 
 		@Override
-		protected Void doInBackground(String... params) {
-            musicFiles = new ArrayList<String>();
-            musicFilesTitles = new ArrayList<String>();
-            
-			try {
-				HttpClient client = new DefaultHttpClient();
-				HttpGet get = new HttpGet(params[0]);
-				HttpResponse response = client.execute(get);
-				InputStream is = response.getEntity().getContent();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(is)); 
-		        StringBuilder sb = new StringBuilder(); 
-
-		        String line = null; 
-	            while ((line = reader.readLine()) != null) { 
-	            	sb.append(line + "\n"); 
-	            } 
-	            
-	            JSONObject obj = new JSONObject(sb.toString());
-	            JSONArray tracks = obj.getJSONArray("tracks");
-	            
-	            for (int i=0; i<tracks.length(); i++) {
-	            	JSONObject track = tracks.getJSONObject(i);
-	            	String trackName = track.getString("name").replaceAll("[!@$%^&*()_+-=<>?:\"\';`~\\s]","");
-	            	musicFiles.add(trackBaseUrl+track.getString("id")+"/"+track.getJSONObject("artist").get("name")
-	            			+"-"+trackName+"3");
-	            	musicFilesTitles.add(track.getString("name"));
-	            }
-	            
-	            Log.v("HERE ARE THE FILES", musicFiles.toString());
-	            Log.v("HERE ARE THE FILE'S Titles", musicFilesTitles.toString());
-	            
-			} catch (IOException e) {
-				
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-		
-		@Override
-    	protected void onPostExecute(Void result) {
-    		super.onPostExecute(result);
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
 			mediaPlayIndicator.setText("Ready To Play");
-    		readyToPlay = true;
-    	}
-    }
-    
-    public void startMediaPlayer() {
+			readyToPlay = true;
+			setupPlaylistDialog(musicFilesTitles);
+		}
+	}
+
+	public void startMediaPlayer() {
 		try {
 			currentSeekPosition = 0;
-			mediaPlayer.setDataSource(musicFiles.get(currentFileIndex));
+			mediaPlayer.setDataSource(musicFiles.get(currentFileIndex)
+					.getFileName());
 			mediaPlayer.prepareAsync();
 			mediaPlayer.setOnPreparedListener(this);
 			mediaPlayer.setOnCompletionListener(this);
@@ -226,86 +196,104 @@ public class MainActivity extends Activity implements OnPreparedListener, OnComp
 			Log.i("Exception", "Exception in streaming mediaplayer e = " + e);
 			mediaPlayIndicator.setText("Error Loading Media");
 		}
-    }
-    
-    public void playPrevious() {
-    	--currentFileIndex;
+	}
+
+	public void playPrevious() {
+		--currentFileIndex;
 		if (currentFileIndex < musicFiles.size() && currentFileIndex >= 0) {
 			mediaPlayer.reset();
 			startMediaPlayer();
 			if (currentFileIndex > 0) {
 				prev.setEnabled(true);
+				prev.setImageResource(R.drawable.previous_button);
 			} else {
 				prev.setEnabled(false);
+				prev.setImageResource(R.drawable.previous_button_disable);
 			}
-			if (currentFileIndex < musicFiles.size()-1) {
+			if (currentFileIndex < musicFiles.size() - 1) {
 				next.setEnabled(true);
+				next.setImageResource(R.drawable.next_button);
 			} else {
 				next.setEnabled(false);
+				next.setImageResource(R.drawable.next_button_disable);
 			}
 		}
-    }
-    
-    public void handlePlayPause() {
-    	if (!mediaPlayer.isPlaying() && musicFiles.size() > 0) {
+	}
+
+	public void handlePlayPause() {
+		if (!mediaPlayer.isPlaying() && musicFiles.size() > 0) {
 			if (isPaused) {
 				handlePlay();
 			} else {
 				startMediaPlayer();
 				isPaused = false;
-				playPause.setImageResource(android.R.drawable.ic_media_pause);
-				if (currentFileIndex < musicFiles.size()) {
+				playPause.setImageResource(R.drawable.play_button);
+				if (currentFileIndex < musicFiles.size()-1) {
 					next.setEnabled(true);
+					next.setImageResource(R.drawable.next_button);
 				} else {
 					next.setEnabled(false);
+					next.setImageResource(R.drawable.next_button_disable);
+				}
+				if (currentFileIndex > 0) {
+					prev.setEnabled(true);
+					prev.setImageResource(R.drawable.previous_button);
+				} else {
+					prev.setEnabled(false);
+					prev.setImageResource(R.drawable.previous_button_disable);
 				}
 			}
 		} else if (mediaPlayer.isPlaying() && musicFiles.size() > 0) {
 			if (isPaused) {
 				handlePlay();
 			} else {
-    			handlePause();
+				handlePause();
 			}
 		}
-    }
-    
-    public void handlePlay() {
-    	mediaPlayer.seekTo(currentSeekPosition);
-    	mediaPlayer.start();
+	}
+
+	public void handlePlay() {
+		mediaPlayer.seekTo(currentSeekPosition);
+		mediaPlayer.start();
 		isPaused = false;
-		playPause.setImageResource(android.R.drawable.ic_media_pause);
-		
+		playPause.setImageResource(R.drawable.play_button);
+
 		mediaPlayIndicator.setText(musicFilesTitles.get(currentFileIndex));
-    }
-    
-    public void handlePause() {
-    	mediaPlayer.pause();
-    	currentSeekPosition = mediaPlayer.getCurrentPosition();
+	}
+
+	public void handlePause() {
+		mediaPlayer.pause();
+		currentSeekPosition = mediaPlayer.getCurrentPosition();
 		isPaused = true;
-		playPause.setImageResource(android.R.drawable.ic_media_play);
+		playPause.setImageResource(R.drawable.pause_button);
 
 		mediaPlayIndicator.setText("PAUSED");
-    }
-    
-    public void playNext() {
-    	++currentFileIndex;
+	}
+
+	public void playNext() {
+		++currentFileIndex;
 		if (currentFileIndex < musicFiles.size()) {
 			mediaPlayer.reset();
 			startMediaPlayer();
 			if (currentFileIndex > 0) {
 				prev.setEnabled(true);
+				prev.setImageResource(R.drawable.previous_button);
 			} else {
 				prev.setEnabled(false);
+				prev.setImageResource(R.drawable.previous_button_disable);
 			}
-			if (currentFileIndex < musicFiles.size()-1) {
+			if (currentFileIndex < musicFiles.size() - 1) {
 				next.setEnabled(true);
+				next.setImageResource(R.drawable.next_button);
 			} else {
 				next.setEnabled(false);
+				next.setImageResource(R.drawable.next_button_disable);
 			}
 		} else {
 			next.setEnabled(false);
+			next.setImageResource(R.drawable.next_button_disable);
 		}
-    }
+	}
 
 	@Override
 	public void onCompletion(MediaPlayer mp) {
@@ -323,13 +311,13 @@ public class MainActivity extends Activity implements OnPreparedListener, OnComp
 		if (v == next) {
 			playNext();
 		}
-		
+
 		if (v == prev) {
 			playPrevious();
 		}
-		
+
 		if (v == playPause && readyToPlay) {
-    		handlePlayPause();
+			handlePlayPause();
 		}
 	}
 }

@@ -120,8 +120,15 @@ containing a value of this type.
         public static final int h_divider_long=0x7f020010;
         public static final int ic_launcher=0x7f020011;
         public static final int lights=0x7f020012;
-        public static final int popup_indicator=0x7f020013;
-        public static final int popup_indicator_reverse=0x7f020014;
+        public static final int music_icon=0x7f020013;
+        public static final int next_button=0x7f020014;
+        public static final int next_button_disable=0x7f020015;
+        public static final int pause_button=0x7f020016;
+        public static final int play_button=0x7f020017;
+        public static final int popup_indicator=0x7f020018;
+        public static final int popup_indicator_reverse=0x7f020019;
+        public static final int previous_button=0x7f02001a;
+        public static final int previous_button_disable=0x7f02001b;
     }
     public static final class friend {
         public static final int active=0x7f090002;
@@ -130,27 +137,33 @@ containing a value of this type.
     }
     public static final class id {
         public static final int bottomToTop=0x7f040001;
-        public static final int buttonHeaderPopupLayout=0x7f04000d;
+        public static final int buttonHeaderPopupLayout=0x7f040010;
         public static final int content=0x7f040009;
         public static final int drawer=0x7f040008;
-        public static final int friends=0x7f04000c;
-        public static final int game_status_layout=0x7f04000b;
+        public static final int friends=0x7f04000d;
+        public static final int game_status_layout=0x7f04000c;
         public static final int handle=0x7f04000a;
         public static final int leftToRight=0x7f040002;
         public static final int media_play_indicator=0x7f040004;
-        public static final int media_play_next=0x7f040007;
-        public static final int media_play_play=0x7f040006;
-        public static final int media_play_prev=0x7f040005;
-        public static final int menu_settings=0x7f04000e;
+        public static final int media_play_next=0x7f040005;
+        public static final int media_play_play=0x7f040007;
+        public static final int media_play_prev=0x7f040006;
+        public static final int menu_settings=0x7f040011;
+        public static final int music_settings=0x7f040012;
         public static final int rightToLeft=0x7f040000;
+        public static final int song_list=0x7f04000b;
+        public static final int subtitle=0x7f04000f;
+        public static final int text=0x7f04000e;
         public static final int topToBottom=0x7f040003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int drawer_chat=0x7f030001;
-        public static final int friend_layout=0x7f030002;
-        public static final int private_chat_dialog=0x7f030003;
-        public static final int private_chat_popup=0x7f030004;
+        public static final int alert_layout=0x7f030001;
+        public static final int drawer_chat=0x7f030002;
+        public static final int friend_layout=0x7f030003;
+        public static final int my_list_view=0x7f030004;
+        public static final int private_chat_dialog=0x7f030005;
+        public static final int private_chat_popup=0x7f030006;
     }
     public static final class menu {
         public static final int activity_main=0x7f080000;
