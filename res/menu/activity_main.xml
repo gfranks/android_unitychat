@@ -4,11 +4,5 @@
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/menu_settings"/>
-    <item
-        android:id="@+id/music_settings"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:icon="@drawable/music_icon"
-        android:title="Refresh"/>
 
 </menu>
