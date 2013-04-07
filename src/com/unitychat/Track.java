@@ -1,12 +1,21 @@
 package com.unitychat;
 
 import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
 public class Track {
 
+	public static final String TRACKS = "tracks";
 	private static final String ID = "id";
 	private static final String NAME = "name";
 	private static final String NUMBER = "number";
@@ -157,5 +166,4 @@ public class Track {
 		}
 		return tracks;
 	}
-
 }

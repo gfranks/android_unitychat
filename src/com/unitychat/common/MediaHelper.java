@@ -8,11 +8,14 @@ import com.unitychat.SocksoApi.SocksoApiCompletionListener;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,14 +30,17 @@ public class MediaHelper implements OnPreparedListener, OnCompletionListener, On
 	MediaPlayer mediaPlayer;
 	ArrayList<Track> musicFiles;
 	ArrayList<String> musicFilesTitles;
-	int currentFileIndex = 0, currentSeekPosition = 0;
-	boolean readyToPlay = false, isPaused = false, mediaHasInitialized = false, shouldRepeat = false;
-	Button pause, play, next, prev, repeat, select_song;
+	int currentFileIndex = 0, currentSeekPosition = 0, track_layout_id, track_number_id, track_name_id;
+	boolean readyToPlay = false, isPaused = false, mediaHasInitialized = false, shouldRepeat = false, startRightAway = false;
+	Button pause, play, next, prev, repeat, select_song, media_refresh;
 	TextView now_playing;
 	View superview;
+	ListView songListView;
+	Dialog trackDialog;
 	
 	public MediaHelper(View superview, int pause_id, int play_id, int next_id, 
-			int prev_id, int repeat_id, int select_song_id, int now_playing_id) {
+			int prev_id, int repeat_id, int select_song_id, int now_playing_id, int track_layout_id, 
+			int track_number_id, int track_name_id, int media_refresh_id) {
 		mediaPlayer = new MediaPlayer();
 		pause = (Button) superview.findViewById(pause_id);
 		pause.setOnClickListener(this);
@@ -48,14 +54,25 @@ public class MediaHelper implements OnPreparedListener, OnCompletionListener, On
 		repeat.setOnClickListener(this);
 		select_song = (Button) superview.findViewById(select_song_id);
 		select_song.setOnClickListener(this);
+		media_refresh = (Button) superview.findViewById(media_refresh_id);
+		media_refresh.setOnClickListener(this);
 		now_playing = (TextView) superview.findViewById(now_playing_id);
 		this.superview = superview;
+		this.track_layout_id = track_layout_id;
+		this.track_number_id = track_number_id;
+		this.track_name_id = track_name_id;
 		
 		setViewsEnabled(false);
 	}
 	
 	public void getMusic() {
-		handlePlay();
+		now_playing.setText("Loading tracks...");
+		startRightAway = false;
+		new SocksoApi(this, true);
+	}
+	
+	public boolean isInitialized() {
+		return mediaHasInitialized;
 	}
 
 	private void startMediaPlayer() {
@@ -95,6 +112,7 @@ public class MediaHelper implements OnPreparedListener, OnCompletionListener, On
 
 	private void handlePlay() {
 		if (!mediaHasInitialized) {
+			startRightAway = true;
 			new SocksoApi(this, true);
 			return;
 		}
@@ -182,6 +200,11 @@ public class MediaHelper implements OnPreparedListener, OnCompletionListener, On
 		if (v == select_song) {
 			setupTrackSelectionDialog();
 		}
+		
+		if (v == media_refresh) {
+			mediaPlayer.stop();
+			getMusic();
+		}
 	}
 	
 	public void setViewsEnabled(boolean enabled) {
@@ -203,26 +226,25 @@ public class MediaHelper implements OnPreparedListener, OnCompletionListener, On
 	public void setupTrackSelectionDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(superview.getContext());
 		builder.setTitle("Select Song");
-		ListView songListView = new ListView(superview.getContext());
-		ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(superview.getContext(),
-				android.R.layout.simple_list_item_1, musicFilesTitles);
-		songListView.setAdapter(modeAdapter);
-		builder.setView(songListView);
-		final Dialog dialog = builder.create();
-	
+		songListView = new ListView(superview.getContext());
+		songListView.setAdapter(new TrackAdapter(superview.getContext(), musicFiles, 
+				track_layout_id, track_number_id, track_name_id));
 		songListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
 				if (mediaPlayer.isPlaying()) {
 					mediaPlayer.reset();
 				}
-				dialog.dismiss();
+				trackDialog.dismiss();
 				currentFileIndex = pos;
 				handlePlay();
 			}
 		});
+
+		builder.setView(songListView);
+		trackDialog = builder.create();
 	
-		dialog.show();
+		trackDialog.show();
 	}
 
 
@@ -234,11 +256,58 @@ public class MediaHelper implements OnPreparedListener, OnCompletionListener, On
 		setViewsEnabled(true);
 		mediaHasInitialized = true;
 		readyToPlay = true;
-		handlePlay();
+		select_song.setEnabled(true);
+		now_playing.setText("Ready to play");
+		if (startRightAway) {
+			handlePlay();
+		}
 	}
 
 	@Override
 	public void SocksoApiFailed(Exception e) {
 		now_playing.setText("Error in media server connection");
+	}
+	
+	private class TrackAdapter extends ArrayAdapter<Track> {
+
+		ArrayList<Track> tracks;
+		int track_layout_id, track_number_id, track_name_id;
+		
+		public TrackAdapter(Context context, ArrayList<Track> objects, int track_layout_id, int track_number_id, int track_name_id) {
+			super(context, android.R.layout.simple_list_item_1, objects);
+			this.tracks = objects;
+			this.track_layout_id = track_layout_id;
+			this.track_number_id = track_number_id;
+			this.track_name_id = track_name_id;
+		}
+		
+		@Override
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflator = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				convertView = inflator.inflate(track_layout_id, null);
+			}
+			
+			convertView.setEnabled(true);
+			
+			((TextView)convertView.findViewById(track_number_id)).setText(""+(position+1));
+			((TextView)convertView.findViewById(track_name_id)).setText(tracks.get(position).getName());
+			
+			// set due to listview onItemClickListener not receiving callbacks
+			convertView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (mediaPlayer.isPlaying()) {
+						mediaPlayer.reset();
+					}
+					trackDialog.dismiss();
+					currentFileIndex = position;
+					handlePlay();
+				}
+			});
+			
+			return convertView;
+		}
+		
 	}
 }

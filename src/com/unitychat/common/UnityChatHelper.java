@@ -29,12 +29,12 @@ import com.unitychat.widget.SlidingDrawer.OnSlidingDrawerShowListener;
 
 public class UnityChatHelper {
 
-	SlidingDrawer mDrawerChat;
-	View mDrawerChatViewContainer;
-	LinearLayout mDrawerChatFriendContainerView;
-	LinearLayout mDrawerChatGameStatusView;
+	SlidingDrawer mUnityChat;
+	View mUnityChatViewContainer;
+	LinearLayout mUnityChatFriendContainerView;
+	LinearLayout mUnityChatGameStatusView;
 	Activity mActivity;
-	DrawerChatShowDismissListener showDismissListener;
+	UnityChatShowDismissListener showDismissListener;
 	MediaHelper mediaHelper;
 	
 	boolean isInGame = false;
@@ -42,24 +42,27 @@ public class UnityChatHelper {
     boolean mHasTimer;
     long mDurationForTimer;
     
-    public UnityChatHelper(Activity activity, int drawerChatResId, boolean withTimer, 
+    public UnityChatHelper(Activity activity, int UnityChatResId, boolean withTimer, 
     		long durationInMilli, boolean inGame, String gameName){
     	mActivity = activity;
-    	mDrawerChat = (SlidingDrawer) activity.findViewById(drawerChatResId);
-    	mDrawerChatViewContainer = mDrawerChat.getContent();
-    	mDrawerChatFriendContainerView = (LinearLayout) mDrawerChatViewContainer.findViewById(R.drawer.friends);
-    	mDrawerChatGameStatusView = (LinearLayout) mDrawerChatViewContainer.findViewById(R.drawer.game_status_layout);
+    	mUnityChat = (SlidingDrawer) activity.findViewById(UnityChatResId);
+    	mUnityChatViewContainer = mUnityChat.getContent();
+    	mUnityChatFriendContainerView = (LinearLayout) mUnityChatViewContainer.findViewById(R.drawer.friends);
+    	mUnityChatGameStatusView = (LinearLayout) mUnityChatViewContainer.findViewById(R.drawer.game_status_layout);
     	mHasTimer = withTimer;
     	mDurationForTimer = durationInMilli;
     	isInGame = inGame;
+    	
+    	mUnityChat.setOnSlidingDrawerShowListener(mOnUnityChatShowListener);
+    	mUnityChat.setOnSlidingDrawerDismissListener(mOnUnityChatDismissListener);
     	
     	setupSubViews();
     }
     
     public void setupSubViews() {
-    	mDrawerChatGameStatusView.setVisibility(isInGame ? View.VISIBLE : View.GONE);
+    	mUnityChatGameStatusView.setVisibility(isInGame ? View.VISIBLE : View.GONE);
     	
-    	View publicChat = getNewDrawerItem();
+    	View publicChat = getNewDrawerChatItem();
     	TextView text = (TextView) publicChat.findViewById(R.friend.id);
     	text.setText("Public Chat");
     	LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) text.getLayoutParams();
@@ -72,18 +75,19 @@ public class UnityChatHelper {
 				
 			}
     	});
-    	mDrawerChatFriendContainerView.addView(publicChat);
+    	mUnityChatFriendContainerView.addView(publicChat);
     	
     	setupMediaPlayer();
     }
     
     public void setupMediaPlayer() {
-    	mediaHelper = new MediaHelper(mDrawerChat, R.drawer.pause, R.drawer.play, 
-    			R.drawer.next, R.drawer.prev, R.drawer.repeat, R.drawer.select_song, R.drawer.now_playing);
+    	mediaHelper = new MediaHelper(mUnityChat, R.drawer.pause, R.drawer.play, 
+    			R.drawer.next, R.drawer.prev, R.drawer.repeat, R.drawer.select_song, R.drawer.now_playing,
+    			R.layout.track_layout, R.track.track_number, R.track.track_name, R.drawer.media_refresh);
     }
     
     public void addNewFriend(final Friend friend) {
-    	View newFriend = getNewDrawerItem();
+    	View newFriend = getNewDrawerChatItem();
     	TextView messages = (TextView) newFriend.findViewById(R.friend.new_messages);
     	TextView id = (TextView) newFriend.findViewById(R.friend.id);
     	CheckedTextView active = (CheckedTextView) newFriend.findViewById(R.friend.active);
@@ -106,13 +110,13 @@ public class UnityChatHelper {
 				displayDialogChat(v, friend);
 			}
     	});
-    	mDrawerChatFriendContainerView.addView(newFriend);
-    	mDrawerChatFriendContainerView.requestLayout();
+    	mUnityChatFriendContainerView.addView(newFriend);
+    	mUnityChatFriendContainerView.requestLayout();
     }
     
     @SuppressLint("NewApi") 
     @SuppressWarnings("deprecation")
-	private View getNewDrawerItem() {
+	private View getNewDrawerChatItem() {
     	LayoutInflater layoutInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View layout = layoutInflater.inflate(R.layout.friend_layout, null);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -137,22 +141,20 @@ public class UnityChatHelper {
     	return layout;
     }
     
-    public void showDrawerChat() {
-    	mDrawerChat.setOnSlidingDrawerShowListener(mOnDrawerChatShowListener);
-    	mDrawerChat.setOnSlidingDrawerDismissListener(mOnDrawerChatDismissListener);
-    	mDrawerChat.animateShow();
+    public void showUnityChat() {
+    	mUnityChat.animateShow();
     }
     
-    public void dismissDrawerChat() {
-    	mDrawerChat.animateDismiss();
+    public void dismissUnityChat() {
+    	mUnityChat.animateDismiss();
     }
     
-    public void setDrawerChatShowOrHideListener(DrawerChatShowDismissListener listener) {
+    public void setUnityChatShowOrHideListener(UnityChatShowDismissListener listener) {
     	showDismissListener = listener;
     }
     
-    public boolean isDrawerChatShowing() {
-    	return mDrawerChat.isShowing();
+    public boolean isUnityChatShowing() {
+    	return mUnityChat.isShowing();
     }
     
     private void displayPopupChat(View v, Friend friend) {
@@ -165,7 +167,7 @@ public class UnityChatHelper {
         chatPopup.show();
     }
     
-    private OnSlidingDrawerShowListener mOnDrawerChatShowListener = new OnSlidingDrawerShowListener() {
+    private OnSlidingDrawerShowListener mOnUnityChatShowListener = new OnSlidingDrawerShowListener() {
 		@Override
 		public void onSlidingDrawerShown() {
 			if (mHasTimer) {
@@ -174,31 +176,35 @@ public class UnityChatHelper {
 				timer.schedule(dropDownTimer, mDurationForTimer);
 			}
 			
+			if (!mediaHelper.isInitialized()) {
+				mediaHelper.getMusic();
+			}
+			
 			if (showDismissListener != null) {
-				showDismissListener.drawerChatDidShow();
+				showDismissListener.UnityChatDidShow();
 			}
 		}
 	};
     
-	private OnSlidingDrawerDismissListener mOnDrawerChatDismissListener = new OnSlidingDrawerDismissListener() {	
+	private OnSlidingDrawerDismissListener mOnUnityChatDismissListener = new OnSlidingDrawerDismissListener() {	
 		@Override
 		public void onSlidingDrawerDismissed() {
 			if (showDismissListener != null) {
-				showDismissListener.drawerChatDidDismiss();
+				showDismissListener.UnityChatDidDismiss();
 			}
 		}
 	};
 
-    public static interface DrawerChatShowDismissListener {
-    	public void drawerChatDidShow();
-    	public void drawerChatDidDismiss();
+    public static interface UnityChatShowDismissListener {
+    	public void UnityChatDidShow();
+    	public void UnityChatDidDismiss();
     }
     
     class DropDownViewTimerTask extends TimerTask {
     	public void run() {
     		mActivity.runOnUiThread(new Runnable() {
     			public void run() {
-    				dismissDrawerChat();
+    				dismissUnityChat();
     			}
     		});
     	}

@@ -22,11 +22,13 @@ public class SocksoApi {
 	ArrayList<String> musicFilesTitles;
 	SocksoApiCompletionListener listener;
 	GetPlayListTracksTask getPlayListTracksTask;
+	boolean wasSuccessful = true;
+	Exception caughtException;
 	
 //	static String playlistBaseUrl = "http://99.70.171.164:4444/api/playlists/";
 //	static String playlistBaseUrl = "http://192.168.1.121:4444/api/playlists/";
 	static String trackBaseUrl = "http://192.168.1.121:4444/stream/";
-	String apiTracksUrl = "http://192.168.1.121:4444/api/playlists/0";
+	String apiTracksUrl = "http://192.168.1.121:4444/api/playlists/6";
 	
 	public SocksoApi(SocksoApiCompletionListener listener, boolean auto_start) {
 		this.listener = listener;
@@ -37,6 +39,7 @@ public class SocksoApi {
 	}
 	
 	public void getTracks() {
+		wasSuccessful = true;
 		getPlayListTracksTask.execute(apiTracksUrl);
 	}
 	
@@ -63,7 +66,7 @@ public class SocksoApi {
 				}
 
 				musicFiles = Track.fromJSONArray(new JSONObject(sb.toString())
-						.getJSONArray("tracks"));
+						.getJSONArray(Track.TRACKS));
 
 				for (int i = 0; i < musicFiles.size(); i++) {
 					Track track = musicFiles.get(i);
@@ -73,14 +76,12 @@ public class SocksoApi {
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				if (listener != null) {
-					listener.SocksoApiFailed(e);
-				}
+				caughtException = e;
+				wasSuccessful = false;
 			} catch (JSONException e) {
 				e.printStackTrace();
-				if (listener != null) {
-					listener.SocksoApiFailed(e);
-				}
+				caughtException = e;
+				wasSuccessful = false;
 			}
 			return null;
 		}
@@ -89,7 +90,11 @@ public class SocksoApi {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			if (listener != null) {
-				listener.SocksoApiSuccessful(musicFiles, musicFilesTitles);
+				if (wasSuccessful) {
+					listener.SocksoApiSuccessful(musicFiles, musicFilesTitles);
+				} else {
+					listener.SocksoApiFailed(caughtException);
+				}
 			}
 		}
 	}

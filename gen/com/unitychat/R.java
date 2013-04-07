@@ -125,15 +125,16 @@ containing a value of this type.
         public static final int popup_indicator_reverse=0x7f020015;
     }
     public static final class drawer {
-        public static final int friends=0x7f0b0008;
-        public static final int game_status_layout=0x7f0b0000;
-        public static final int next=0x7f0b0005;
-        public static final int now_playing=0x7f0b0001;
-        public static final int pause=0x7f0b0002;
-        public static final int play=0x7f0b0004;
-        public static final int prev=0x7f0b0003;
-        public static final int repeat=0x7f0b0006;
-        public static final int select_song=0x7f0b0007;
+        public static final int friends=0x7f0c0009;
+        public static final int game_status_layout=0x7f0c0000;
+        public static final int media_refresh=0x7f0c0008;
+        public static final int next=0x7f0c0005;
+        public static final int now_playing=0x7f0c0001;
+        public static final int pause=0x7f0c0002;
+        public static final int play=0x7f0c0004;
+        public static final int prev=0x7f0c0003;
+        public static final int repeat=0x7f0c0006;
+        public static final int select_song=0x7f0c0007;
     }
     public static final class friend {
         public static final int active=0x7f090002;
@@ -156,7 +157,8 @@ containing a value of this type.
         public static final int friend_layout=0x7f030001;
         public static final int private_chat_dialog=0x7f030002;
         public static final int private_chat_popup=0x7f030003;
-        public static final int unity_drawer_layout=0x7f030004;
+        public static final int track_layout=0x7f030004;
+        public static final int unity_drawer_layout=0x7f030005;
     }
     public static final class menu {
         public static final int activity_main=0x7f080000;
@@ -191,6 +193,10 @@ containing a value of this type.
         public static final int AppTheme=0x7f070003;
         public static final int Dialog_BG1=0x7f070000;
         public static final int Dialog_BG2=0x7f070001;
+    }
+    public static final class track {
+        public static final int track_name=0x7f0b0001;
+        public static final int track_number=0x7f0b0000;
     }
     public static final class styleable {
         /** Attributes that can be used with a SlidingDrawer.
