@@ -1,136 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-	android:background="@color/light_gray"
-    android:orientation="vertical" >
-    
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/light_gray"
+              android:orientation="vertical">
+
     <LinearLayout
-		android:id="@+drawer/game_status_layout"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-	    android:orientation="vertical" >
-		<TextView
-		    android:layout_width="match_parent"
-		    android:layout_height="0.5dip"
-		    android:background="@color/black" />
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="25dip"
-			android:gravity="center" 
-			android:background="@drawable/gradient_bg"
-			android:text="GAME PAUSED" />
-	</LinearLayout>
-    
-    <TextView
-	    android:layout_width="match_parent"
-	    android:layout_height="0.5dip"
-	    android:background="@color/black" />
-    
-    <RelativeLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-		
+            android:id="@+drawer/game_status_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <TextView
-	        android:id="@+drawer/now_playing"
-	        android:layout_width="300dip"
-	        android:layout_height="wrap_content"
-	        android:ellipsize="marquee"
-	        android:focusable="true"
-	        android:focusableInTouchMode="true"
-	        android:freezesText="true"
-	        android:gravity="center"
-	        android:marqueeRepeatLimit="marquee_forever"
-	        android:paddingLeft="15dip"
-	        android:paddingRight="15dip"
-	        android:scrollHorizontally="true"
-	        android:singleLine="true" />
-        
-        <RelativeLayout 
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="5dip">
-	        
-	        <ImageView 
-		        android:layout_width="200dip"
-		        android:layout_height="65dip"
-		        android:layout_marginTop="5dip"
-		        android:src="@drawable/media_bar"
-		        android:layout_centerHorizontal="true"/>
-	        <Button 
-	            android:id="@+drawer/pause"
-	            android:layout_width="35dip"
-	            android:layout_height="30dip"
-	            android:layout_marginTop="15dip"
-	            android:layout_marginLeft="8dip"
-	            android:background="@null"
-	            android:layout_alignParentLeft="true"/>
-	        <Button 
-	            android:id="@+drawer/prev"
-	            android:layout_width="35dip"
-	            android:layout_height="30dip"
-	            android:layout_marginTop="15dip"
-	            android:layout_marginLeft="42dip"
-	            android:background="@null"
-	            android:layout_alignParentLeft="true"/>
-	        <Button 
-	            android:id="@+drawer/play"
-	            android:layout_width="45dip"
-	            android:layout_height="45dip"
-	            android:layout_marginTop="8dip"
-	            android:layout_marginLeft="1dip"
-	            android:background="@null"
-	            android:layout_centerHorizontal="true"/>
-	        <Button 
-	            android:id="@+drawer/next"
-	            android:layout_width="35dip"
-	            android:layout_height="30dip"
-	            android:layout_marginTop="15dip"
-	            android:layout_marginLeft="123dip"
-	            android:background="@null"
-	            android:layout_alignParentLeft="true"/>
-	        <Button 
-	            android:id="@+drawer/repeat"
-	            android:layout_width="35dip"
-	            android:layout_height="30dip"
-	            android:layout_marginTop="15dip"
-	            android:layout_marginLeft="160dip"
-	            android:background="@null"
-	            android:layout_alignParentLeft="true"/>
-	        <Button 
-	            android:id="@+drawer/select_song"
-	            android:layout_width="165dip"
-	            android:layout_height="17dip"
-	            android:layout_marginTop="50dip"
-	            android:layout_marginLeft="15dip"
-	            android:background="@null"
-	            android:layout_alignParentLeft="true"/>
-		</RelativeLayout>
-		
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/black"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dip"
+                android:gravity="center"
+                android:background="@drawable/gradient_bg"
+                android:text="GAME PAUSED"/>
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="@color/black"/>
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+        <TextView
+                android:id="@+drawer/now_playing"
+                android:layout_width="300dip"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:scrollHorizontally="true"
+                android:singleLine="true"/>
+
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dip">
+
+            <ImageView
+                    android:layout_width="200dip"
+                    android:layout_height="65dip"
+                    android:layout_marginTop="5dip"
+                    android:src="@drawable/media_bar"
+                    android:layout_centerHorizontal="true"/>
+
+            <Button
+                    android:id="@+drawer/pause"
+                    android:layout_width="35dip"
+                    android:layout_height="30dip"
+                    android:layout_marginTop="15dip"
+                    android:layout_marginLeft="8dip"
+                    android:background="@null"
+                    android:layout_alignParentLeft="true"/>
+
+            <Button
+                    android:id="@+drawer/prev"
+                    android:layout_width="35dip"
+                    android:layout_height="30dip"
+                    android:layout_marginTop="15dip"
+                    android:layout_marginLeft="42dip"
+                    android:background="@null"
+                    android:layout_alignParentLeft="true"/>
+
+            <Button
+                    android:id="@+drawer/play"
+                    android:layout_width="45dip"
+                    android:layout_height="45dip"
+                    android:layout_marginTop="8dip"
+                    android:layout_marginLeft="1dip"
+                    android:background="@null"
+                    android:layout_centerHorizontal="true"/>
+
+            <Button
+                    android:id="@+drawer/next"
+                    android:layout_width="35dip"
+                    android:layout_height="30dip"
+                    android:layout_marginTop="15dip"
+                    android:layout_marginLeft="123dip"
+                    android:background="@null"
+                    android:layout_alignParentLeft="true"/>
+
+            <Button
+                    android:id="@+drawer/repeat"
+                    android:layout_width="35dip"
+                    android:layout_height="30dip"
+                    android:layout_marginTop="15dip"
+                    android:layout_marginLeft="160dip"
+                    android:background="@null"
+                    android:layout_alignParentLeft="true"/>
+
+            <Button
+                    android:id="@+drawer/select_song"
+                    android:layout_width="165dip"
+                    android:layout_height="17dip"
+                    android:layout_marginTop="50dip"
+                    android:layout_marginLeft="15dip"
+                    android:background="@null"
+                    android:layout_alignParentLeft="true"/>
+        </RelativeLayout>
+
         <Button
-            android:id="@+drawer/media_refresh"
-            android:layout_width="25dip"
-            android:layout_height="25dip"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="50dip"
-            android:background="@android:drawable/ic_popup_sync" />
+                android:id="@+drawer/media_refresh"
+                android:layout_width="25dip"
+                android:layout_height="25dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="50dip"
+                android:background="@android:drawable/ic_popup_sync"/>
     </RelativeLayout>
-    
-    <HorizontalScrollView 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content">
-		
+
+    <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <LinearLayout
-	        android:id="@+drawer/friends"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:orientation="horizontal" 
-		    android:padding="2dip" 
-		    android:layout_marginBottom="3dip"/>
-        
+                android:id="@+drawer/friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dip"
+                android:layout_marginBottom="3dip"/>
+
     </HorizontalScrollView>
 
 </LinearLayout>

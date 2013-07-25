@@ -10,20 +10,20 @@
     <color name="green">#2f6945</color>
     <color name="whites">#ffffff</color>
     <color name="light_blue">#5ab2d6</color>
-    
+
     <!-- COUPONS -->
     <color name="coupon_top">#f0eab9</color>
     <color name="coupon_bottom">#d8d08f</color>
     <color name="coupon_text">#2f6945</color>
-    
+
     <!-- DETAILS PAGE -->
     <color name="translucent_black">#80000000</color>
-    
+
     <!-- ACCORDION  -->
     <color name="accordion_border_color">#355D8F</color>
     <color name="accordion_header_color">#ffffff</color>
     <color name="accordion_header_border_shadow">#ffffff</color>
     <color name="accordion_section_color">#ffffff</color>
-    
-    
+
+
 </resources>

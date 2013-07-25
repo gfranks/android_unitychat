@@ -1,44 +1,44 @@
 package com.unitychat.models;
 
 public class Friend {
-	
-	public enum Status {
-		ACTIVE,
-		INGAME,
-		CHATTING,
-		INACTIVE;
-	}
-	
-	private String id, tag;
-	private Status status;
-	
-	public Friend(String id, String tag, Status status) {
-		this.id = id;
-		this.tag = tag;
-		this.status = status;
-	}
 
-	public String getId() {
-		return id;
-	}
+    public enum Status {
+        ACTIVE,
+        INGAME,
+        CHATTING,
+        INACTIVE;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    private String id, tag;
+    private Status status;
 
-	public String getTag() {
-		return tag;
-	}
+    public Friend(String id, String tag, Status status) {
+        this.id = id;
+        this.tag = tag;
+        this.status = status;
+    }
 
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public Status getStatus() {
-		return status;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }

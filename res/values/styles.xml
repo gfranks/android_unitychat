@@ -4,12 +4,12 @@
         <item name="android:windowBackground">@drawable/chat_dialog_bg1</item>
         <item name="android:windowNoTitle">true</item>
     </style>
-    
+
     <style name="Dialog_BG2" parent="android:Theme.Dialog">
         <item name="android:windowBackground">@drawable/chat_dialog_bg2</item>
         <item name="android:windowNoTitle">true</item>
     </style>
-    
+
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in

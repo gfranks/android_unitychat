@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="516f654f-d72d-4bf5-a25a-dd1899d0a4f5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_support_v4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_support_v4_31dfc4857f98f4a302cbb64a544a71b2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android_unitychat.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/unitychat/BuildConfig.java" afterPath="$PROJECT_DIR$/gen/com/unitychat/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/unitychat/R.java" afterPath="$PROJECT_DIR$/gen/com/unitychat/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AndroidManifest.xml" afterPath="$PROJECT_DIR$/bin/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/widget/ChatDialog.java" afterPath="$PROJECT_DIR$/src/com/unitychat/widget/ChatDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/widget/ChatPopup.java" afterPath="$PROJECT_DIR$/src/com/unitychat/widget/ChatPopup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/models/Friend.java" afterPath="$PROJECT_DIR$/src/com/unitychat/models/Friend.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/unitychat/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/common/MediaHelper.java" afterPath="$PROJECT_DIR$/src/com/unitychat/common/MediaHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/widget/SlidingDrawer.java" afterPath="$PROJECT_DIR$/src/com/unitychat/widget/SlidingDrawer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/SocksoApi.java" afterPath="$PROJECT_DIR$/src/com/unitychat/SocksoApi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/Track.java" afterPath="$PROJECT_DIR$/src/com/unitychat/Track.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/unitychat/common/UnityChatHelper.java" afterPath="$PROJECT_DIR$/src/com/unitychat/common/UnityChatHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/activity_main.xml" afterPath="$PROJECT_DIR$/res/menu/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/android_support_v4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/android_support_v4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/attrs.xml" afterPath="$PROJECT_DIR$/res/values/attrs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/btn.xml" afterPath="$PROJECT_DIR$/res/drawable/btn.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/btn_grey.xml" afterPath="$PROJECT_DIR$/res/drawable/btn_grey.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/btn_normal.xml" afterPath="$PROJECT_DIR$/res/drawable/btn_normal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/btn_pressed.xml" afterPath="$PROJECT_DIR$/res/drawable/btn_pressed.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/chat_dialog_bg2.xml" afterPath="$PROJECT_DIR$/res/drawable/chat_dialog_bg2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/colors.xml" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/friend_bg.xml" afterPath="$PROJECT_DIR$/res/drawable/friend_bg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/friend_layout.xml" afterPath="$PROJECT_DIR$/res/layout/friend_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/friend_normal.xml" afterPath="$PROJECT_DIR$/res/drawable/friend_normal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/friend_pressed.xml" afterPath="$PROJECT_DIR$/res/drawable/friend_pressed.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/gradient_bg.xml" afterPath="$PROJECT_DIR$/res/drawable/gradient_bg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/lights.xml" afterPath="$PROJECT_DIR$/res/drawable/lights.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/private_chat_dialog.xml" afterPath="$PROJECT_DIR$/res/layout/private_chat_dialog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/private_chat_popup.xml" afterPath="$PROJECT_DIR$/res/layout/private_chat_popup.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/styles.xml" afterPath="$PROJECT_DIR$/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/track_layout.xml" afterPath="$PROJECT_DIR$/res/layout/track_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/unity_drawer_layout.xml" afterPath="$PROJECT_DIR$/res/layout/unity_drawer_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="android_unitychat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,6 +104,19 @@
   <component name="FavoritesManager">
     <favorites_list name="android_unitychat" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="0" selection-start="1300" selection-end="1300" vertical-scroll-proportion="0.5816686" vertical-offset="0" max-vertical-offset="851">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="FindManager">
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
@@ -83,6 +128,13 @@
   <component name="GitLogSettings">
     <option name="myDateState">
       <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+      </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
@@ -108,6 +160,7 @@
     <ignored-problems>
       <problem id="unused-library(library:project:android-support-v4)" />
       <problem id="unused-library(library:project:android-support-v4-31dfc4857f98f4a302cbb64a544a71b2)" />
+      <problem id="unused-library(library:project:android_unitychat)" />
     </ignored-problems>
   </component>
   <component name="ProjectView">
@@ -123,6 +176,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -144,24 +198,24 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SimpleStack/android_unitychat" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Android Application.android_unitychat">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -297,7 +351,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="22" width="1900" height="999" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -308,13 +362,14 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24973032" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24973032" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -383,6 +438,22 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/project.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="853">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="1300" selection-end="1300" vertical-scroll-proportion="0.5816686" vertical-offset="0" max-vertical-offset="851">
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>

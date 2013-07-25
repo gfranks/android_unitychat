@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="android_unitychat">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../SimpleStack/android_unitychat" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../SimpleStack/android_unitychat/gen" />
+      <root url="file://$PROJECT_DIR$/../SimpleStack/android_unitychat/src" />
+    </SOURCES>
+  </library>
+</component>

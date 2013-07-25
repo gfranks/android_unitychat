@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dip"
-    android:layout_height="300dip"
-    android:background="@android:color/transparent" 
-    android:orientation="vertical" 
-	android:weightSum="10" 
-	android:padding="2dip">
- 
+              android:layout_width="300dip"
+              android:layout_height="300dip"
+              android:background="@android:color/transparent"
+              android:orientation="vertical"
+              android:weightSum="10"
+              android:padding="2dip">
+
     <Button
-        android:id="@+chat/challenge"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1.45" 
-        android:layout_marginTop="1dip" 
-        android:background="@drawable/btn_grey"
-        android:text="Challenge" 
-        android:textColor="@color/whites"/>
-    
+            android:id="@+chat/challenge"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1.45"
+            android:layout_marginTop="1dip"
+            android:background="@drawable/btn_grey"
+            android:text="Challenge"
+            android:textColor="@color/whites"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.05"
-        android:layout_marginTop="1dip"
-        android:background="@drawable/h_divider_long" />
-    
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.05"
+            android:layout_marginTop="1dip"
+            android:background="@drawable/h_divider_long"/>
+
     <TextView
-        android:id="@+chat/messages"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="7" 
-        android:layout_margin="5dip"
-        android:text="No Messages" />
-    
+            android:id="@+chat/messages"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="7"
+            android:layout_margin="5dip"
+            android:text="No Messages"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.05"
-        android:background="@drawable/h_divider_long" />
-    
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.05"
+            android:background="@drawable/h_divider_long"/>
+
     <LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="0dip"
-	    android:layout_weight="1.45"
-	    android:weightSum="10"
-	    android:orientation="horizontal" 
-	    android:gravity="center_vertical|bottom"
-	    android:layout_marginTop="1dip"
-	    android:layout_marginLeft="2dip"
-	    android:layout_marginRight="2dip" >
-	    
-	    <EditText
-	        android:id="@+chat/input"
-	        android:layout_width="0dip"
-	        android:layout_height="wrap_content"
-	    	android:layout_weight="7" />
-	    
-	    <Button
-	        android:id="@+chat/send"
-	        android:layout_width="0dip"
-	        android:layout_height="wrap_content" 
-	    	android:layout_weight="3"
-	    	android:textSize="13sp"
-	        android:text="Send" />
-	</LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1.45"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|bottom"
+            android:layout_marginTop="1dip"
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="2dip">
+
+        <EditText
+                android:id="@+chat/input"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"/>
+
+        <Button
+                android:id="@+chat/send"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="13sp"
+                android:text="Send"/>
+    </LinearLayout>
 </LinearLayout>
